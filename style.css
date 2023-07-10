@@ -33,13 +33,22 @@ body {
 #canvas {
   border: 1px solid #000;
   background-color: #ffffff;
+  
 }
-
 #button-container {
   display: flex;
   justify-content: center;
+  align-content: right;
+  gap: 20px;
 }
 
+#rightButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: right;
+  gap: 20px;
+}
 button {
   padding: 10px 20px;
   margin: 0 10px;

@@ -8,30 +8,36 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
 
-    <div id="objectNameContainer">
-      <h2 id="objectName"></h2>
-    </div>
-
-    <div id="canvas-container">
-      <canvas id="canvas" width="500" height="500"></canvas>
-    </div>
     <div id="button-container">
       <button id="deleteBtn">Delete Canvas</button>
-      <button id="saveBtn">Save Drawing</button>
-      <button id="uploadBtn">Upload to Firebase Storage</button>
+      <button id="saveBtn" style ="display:none;">Save Drawing</button>
+
+      <div id="objectNameContainer">
+        <h2 id="objectName"></h2>
+      </div>
+
+      <button id="uploadBtn"   style ="display:none;">Upload to Firebase Storage</button>
       <button id="nextBtn">Next Object</button>
     </div>
+
     
+
+    <div id="canvas-container">
+      <canvas id="canvas" ></canvas>
+    </div>
+
     <div id="modal" class="modal">
       <div class="modal-content">
         <h3>Enter User Information</h3>
-        <input type="text" id="nameInput" placeholder="Enter your name">
+        <input type="text" id="nameInput" placeholder="Enter your name" />
         <div>
           <label>
-            <input type="radio" name="tool" id="penInput" value="pen" checked> Pen
+            <input type="radio" name="tool" id="penInput" value="pen" checked />
+            Pen
           </label>
           <label>
-            <input type="radio" name="tool" id="mouseInput" value="mouse"> Mouse
+            <input type="radio" name="tool" id="mouseInput" value="mouse" />
+            Mouse
           </label>
         </div>
         <button id="submitBtn">Submit</button>

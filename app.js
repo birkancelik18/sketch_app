@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentObjectIndex = 0;
     let currentObjectClass = objectClasses[currentObjectIndex];
-    let name="";
-    let tool =""; 
-    
+    let name = "";
+    let tool = "";
+
     objectNameElement.textContent = currentObjectClass;
 
     let isDrawing = false;
@@ -123,12 +123,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Show the modal dialog
     function showModal() {
- 
-        modal.style.display= "flex";
-        modal.style.justifyContent= "center";
-        modal.style.alignItems= "center";
-        modal.style.height= "100vh";
-      
+
+        modal.style.display = "flex";
+        modal.style.justifyContent = "center";
+        modal.style.alignItems = "center";
+        modal.style.height = "100vh";
+
     }
 
     // Hide the modal dialog
@@ -138,8 +138,19 @@ document.addEventListener("DOMContentLoaded", function () {
     function hideCanvas() {
         document.getElementById("canvas-container").style.display = "none";
         document.getElementById("button-container").style.display = "none";
-        
+
     }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - document.getElementById("button-container").offsetHeight - document.getElementById("objectNameContainer").offsetHeight;
+        drawStrokes();
+    }
+    // Event listeners for window resize
+    window.addEventListener("resize", resizeCanvas);
+    
+    // Start with initial canvas resize
+    resizeCanvas();
 
     hideModal();
 
@@ -150,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download =name+"_"+tool+"_drawing.json";
+        a.download = name + "_" + tool + "_drawing.json";
         a.click();
     });
 
@@ -179,10 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Upload drawing as JSON file to Firebase Storage
     uploadBtn.addEventListener("click", function () {
         let database = firebase.storage();
-        
+
         const jsonData = JSON.stringify(submit_content);
         const blob = new Blob([jsonData], { type: "application/json" });
-        const fileName = name+"_"+tool+"_drawing.json";
+        const fileName = name + "_" + tool + "_drawing.json";
 
         // Create a storage reference with the desired filename
         const storageRef = firebase.storage().ref().child(fileName);
@@ -256,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "tool": tool
         };
 
-        submit_content = {"user_info": userInfo, "drawings": data};
+        submit_content = { "user_info": userInfo, "drawings": data };
 
         // Hide the modal dialog
         hideModal();
