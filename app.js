@@ -30,6 +30,16 @@ let tool = "";
 
 objectNameElement.textContent = currentObjectClass;
 
+// code for some security constrains of chrome 
+[{
+    "origin": [
+        "*"
+    ],
+    "method": [
+        "GET"
+    ],
+    "maxAgeSeconds": 3600
+}]
 
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {
