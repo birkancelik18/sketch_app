@@ -87,13 +87,23 @@
           };
           let full_data = JSON.parse(localStorage.getItem("full_data"));
           let submit_content = { "user_info": userInfo, "drawings": full_data };
-
+          usersRefInDatabase.push(submit_content, (error) => {
+            if (error) {
+              console.error("Error pushing data:", error);
+            } else {
+              console.log("Data sent successfully!");
+      
+              // Redirect to the end.html page after the data is sent successfully
+              window.location.href = "./end.html";
+            }
+          });
+      
           // send data to server iff user draw something
           // WARNING: existence of utterings are not checked here they might be "no answer" !!!
 
-          usersRefInDatabase.push(submit_content);
+          //usersRefInDatabase.push(submit_content);
         
-            window.location.href = "./end.html";
+          //window.location.href = "./end.html";
           /*
           // Uncomment this section if you want to save the data to Firebase Storage
 
