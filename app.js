@@ -38,7 +38,7 @@ let currentObjectClass = objectClasses[currentObjectIndex];
 let name = "";
 let tool = "";
 
-objectNameElement.textContent = currentObjectClass;
+objectNameElement.textContent = "Draw: " + currentObjectClass;
 
 // code for some security constrains of chrome 
 [{
@@ -114,7 +114,7 @@ brush.color = 'black';
 //Set size conditions
 brush.width = 8;
 
-//2.Make brush work
+/*
 drawingModeEl.onclick = function () {
     //canvas.getActiveObjects()[canvas.getActiveObjects]
     canvas.isDrawingMode = !canvas.isDrawingMode;
@@ -144,7 +144,7 @@ drawingModeEl.onclick = function () {
 
     }
 };
-
+*/
 // Mouse move and coordinates when it is down(drawing)
 canvas.on('mouse:down', function (options) {
     mDown = true;
@@ -172,10 +172,12 @@ function getPointerHandler(evt) {
     var point = null;
     if (mDown & canvas.isDrawingMode) {
         point = canvas.getPointer(evt);
+        currDate = Date.now();
+        elapsedMilliseconds = currDate - startDate;
 
         xCords.push(point.x);
         yCords.push(point.y);
-        times.push(timePassed);
+        times.push(elapsedMilliseconds);
 
         stroke[0] = xCords;
         stroke[1] = yCords;
@@ -189,7 +191,7 @@ function getPointerHandler(evt) {
         // get stroke stroke object and attach drawing to it
         // This way we can send only part of canvas for prediction
         canvas.getObjects()[canvas.getObjects().length - 1].vectorRepresentation = stroke;
-        
+
         stroke = [];
         xCords = [];
         yCords = [];
@@ -254,10 +256,12 @@ function handleMove(evt) {
     let point = null;
     if (pDown & canvas.isDrawingMode) {
         point = canvas.getPointer(evt);
+        currDate = Date.now();
+        elapsedMilliseconds = currDate - startDate;
 
         xCords.push(point.x);
         yCords.push(point.y);
-        times.push(timePassed);
+        times.push(elapsedMilliseconds);
         //cloneXcords = [...xCords]; // Since we don not get time values properly fullfill the third array with zeros.
         //times = cloneXcords.fill(-1);
         stroke[0] = xCords;
@@ -313,7 +317,18 @@ function handleCancel(evt) {
 
 }
 
-// this function is called from HTML file it trigers when the button is cliked. 
+function clearCanvas(){
+    let activeObjects = canvas.getObjects();
+    // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
+    for (let i = 0; i < activeObjects.length; i++) {
+        // console.log("active strtoke is ");
+        // console.log(activeObjects[i].vectorRepresentation);
+        canvas.remove(activeObjects[i]);
+
+    }
+}
+
+// this function is called from HTML file it trigers when the button is clicked. 
 function deleteObjects() {
     if (canvas.isDrawingMode) {
         canvas.isDrawingMode = !canvas.isDrawingMode;
@@ -405,6 +420,7 @@ function nextSketch() {
     //make yardım sendDrawingToServeral button unclickable until model returns a prediction
 
     // get selected strokes
+ 
 
     let drawing = getDrawing();
 
@@ -435,8 +451,9 @@ function nextSketch() {
             // Show the next object to draw
             currentObjectClass = objectClasses[currentObjectIndex];
             console.log(currentObjectClass);
-            objectNameElement.textContent = currentObjectClass;
+            objectNameElement.textContent =  "Draw: " + currentObjectClass;
             timeLeft = TIME_LIMIT_PER_WORD;
+            startDate = Date.now();
         }
     }
 
@@ -489,18 +506,21 @@ function upSampleStrokeVector(vectorRepresentation) {
     return upsampledVector;
 }
 
-const TIME_LIMIT_PER_WORD = 20;
+const TIME_LIMIT_PER_WORD = 20; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * objectClasses.length;
-let timeLeft = TIME_LIMIT_PER_WORD
-let timePassed = 0;
-let startDate, endDate;
+let timeLeft = TIME_LIMIT_PER_WORD // in seconds
+let startDate, currDate, endDate;
 let timerID;
-function timer(){
-    timerID = setInterval(function () {
-        timePassed++;
-        timeLeft--;
 
-        if (timeLeft == 0) {
+let elapsedMilliseconds=0;
+startDate = Date.now();
+
+function timer() {
+
+    timerID = setInterval(function () {
+
+        timeLeft--;
+        if (timeLeft === 0) {
             document.getElementById("seconds").innerHTML = "00:" + timeLeft + "0";
         } else if (timeLeft < 10) {
             document.getElementById("seconds").innerHTML = "00:0" + timeLeft;
@@ -508,13 +528,17 @@ function timer(){
             document.getElementById("seconds").innerHTML = "00:" + timeLeft;
         }
 
-        if(timeLeft == 0){
+        if (timeLeft == 0) {
+            
             nextSketch();
             timeLeft = TIME_LIMIT_PER_WORD;
         }
 
-        console.log("time passed" + timePassed);
-       
+        console.log("time passed " + timeLeft);
+
+
+        
+   
     }, 1000);
 }
 
