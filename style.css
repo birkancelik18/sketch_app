@@ -16,6 +16,7 @@ body {
   width: 15%;
   margin: 2px;
   display: inline-block;
+  font-size: 20px;
 }
 
 .column-middle {
@@ -188,4 +189,22 @@ img {
 }
 
 
-/**charbot animation */
+
+#objectNameContainer {
+  display: flex; /* Display the elements in a row */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; /* Add space between elements */
+}
+
+#objectName {
+  font-size: 30px; /* Set the font size for the heading */
+  color: black; /* Set the color of the heading text */
+
+}
+
+#seconds {
+
+  font-weight: bold; /* Optional: Make the heading bold */
+  font-size: 30px; /* Set the font size for the seconds */
+  color: black; /* Set the color of the seconds text */
+}

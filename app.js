@@ -1,3 +1,13 @@
+// Description: This file is the main file of the project. It contains the main functions of the project.
+// This code has includes sample usage of fabric.js library and firebase dataset. 
+// This can be used and utilized for any purpose. Please change the firebase configurations to use your own dataset unless those are my data.
+// // // // *********************** // // // //
+// WARNING: This code is not a production code. It is a sample code for demonstration purposes.
+// // // // *********************** // // // //
+// WARNING: If some users continue until the last second of the drawing time, the last stroke may not be saved.
+// Because mouse or pen should be up from the canvas to save the last stroke.
+
+
 const objectClasses = [
     "airplane",
     "apple",
@@ -87,6 +97,7 @@ var drawing = [];
 var stroke = []; //should contain 3 array in it
 var xCords = [];
 var yCords = [];
+let times = [];
 
 var wordName = "";
 
@@ -164,11 +175,11 @@ function getPointerHandler(evt) {
 
         xCords.push(point.x);
         yCords.push(point.y);
+        times.push(timePassed);
 
         stroke[0] = xCords;
         stroke[1] = yCords;
-
-        //stroke[2] = times;
+        stroke[2] = times;
 
 
     }
@@ -178,7 +189,7 @@ function getPointerHandler(evt) {
         // get stroke stroke object and attach drawing to it
         // This way we can send only part of canvas for prediction
         canvas.getObjects()[canvas.getObjects().length - 1].vectorRepresentation = stroke;
-        ;
+        
         stroke = [];
         xCords = [];
         yCords = [];
@@ -246,10 +257,12 @@ function handleMove(evt) {
 
         xCords.push(point.x);
         yCords.push(point.y);
+        times.push(timePassed);
         //cloneXcords = [...xCords]; // Since we don not get time values properly fullfill the third array with zeros.
         //times = cloneXcords.fill(-1);
         stroke[0] = xCords;
         stroke[1] = yCords;
+        stroke[2] = times;
     }
 }
 
@@ -290,6 +303,7 @@ function handleEnd(evt) {
         stroke = [];
         xCords = [];
         yCords = [];
+        times = [];
     }
 }
 
@@ -391,7 +405,9 @@ function nextSketch() {
     //make yardım sendDrawingToServeral button unclickable until model returns a prediction
 
     // get selected strokes
+
     let drawing = getDrawing();
+
     if (drawing != "small_strokes") {
 
         // Record the current drawing and its category
@@ -406,6 +422,7 @@ function nextSketch() {
         stroke = []; //should contain 2 array in it
         xCords = [];
         yCords = [];
+        times = [];
         clearCanvas();
 
         // Show the next object to draw
@@ -419,6 +436,7 @@ function nextSketch() {
             currentObjectClass = objectClasses[currentObjectIndex];
             console.log(currentObjectClass);
             objectNameElement.textContent = currentObjectClass;
+            timeLeft = TIME_LIMIT_PER_WORD;
         }
     }
 
@@ -471,3 +489,33 @@ function upSampleStrokeVector(vectorRepresentation) {
     return upsampledVector;
 }
 
+const TIME_LIMIT_PER_WORD = 20;
+const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * objectClasses.length;
+let timeLeft = TIME_LIMIT_PER_WORD
+let timePassed = 0;
+let startDate, endDate;
+let timerID;
+function timer(){
+    timerID = setInterval(function () {
+        timePassed++;
+        timeLeft--;
+
+        if (timeLeft == 0) {
+            document.getElementById("seconds").innerHTML = "00:" + timeLeft + "0";
+        } else if (timeLeft < 10) {
+            document.getElementById("seconds").innerHTML = "00:0" + timeLeft;
+        } else {
+            document.getElementById("seconds").innerHTML = "00:" + timeLeft;
+        }
+
+        if(timeLeft == 0){
+            nextSketch();
+            timeLeft = TIME_LIMIT_PER_WORD;
+        }
+
+        console.log("time passed" + timePassed);
+       
+    }, 1000);
+}
+
+timer();
