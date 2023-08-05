@@ -42,79 +42,46 @@ body {
   word-wrap: break-word;
 }
 
-#chatbot-container {
-  margin: 15px;
-  padding: 20px 0;
-}
-.chatbot-button {
-  position: relative;
-  width: auto;
-  display: inline-block;
-  color: #ecf0f1;
-  text-decoration: none;
-  border-radius: 5px;
-  border: solid 1px #f39c12;
-  background: #e67e22;
-  text-align: center;
-  padding: 2px 3px 2px;
-  margin: 5px;
-  -webkit-transition: all 0.1s;
-  -moz-transition: all 0.1s;
-  transition: all 0.1s;
-  -webkit-box-shadow: 0px 6px 0px #e9da11;
-  -moz-box-shadow: 0px 6px 0px #d35400;
-  text-transform: uppercase;
-  font-size: 10pt;
-  font-weight: bold;
-  box-shadow: 0px 6px 0px #d35400;
-  cursor: pointer;
-}
-chatbot-button:active {
-  -webkit-box-shadow: 0px 2px 0px #d35400;
-  -moz-box-shadow: 0px 2px 0px #d35400;
-  box-shadow: 0px 2px 0px #d35400;
-  position: relative;
-  top: 4px;
-}
 /* Clear floats after the columns */
 
 #canvas-wrapper {
   min-height: 80%;
   border: 5px solid #ff5733;
 }
-
 .btn {
-  position: relative;
-  width: auto;
-  display: inline-block;
-  color: #ecf0f1;
-  text-decoration: none;
-  border-radius: 5px;
-  border: solid 1px #f39c12;
-  background: #e67e22;
-  text-align: center;
-  padding: 8px 8px 7px;
-  margin: 12px;
-  -webkit-transition: all 0.1s;
-  -moz-transition: all 0.1s;
-  transition: all 0.1s;
-  -webkit-box-shadow: 0px 6px 0px #e9da11;
-  -moz-box-shadow: 0px 6px 0px #d35400;
-  text-transform: uppercase;
-  font-size: 15pt;
-  font-weight: bold;
-  box-shadow: 0px 6px 0px #d35400;
-  cursor: pointer;
-}
-
-.btn:active {
-  -webkit-box-shadow: 0px 2px 0px #d35400;
-  -moz-box-shadow: 0px 2px 0px #d35400;
-  box-shadow: 0px 5px 0px #d35400;
-  position: relative;
-  top: 4px;
-}
-
+    margin-top: 30px;
+    position: relative;
+    width: auto;
+    display: inline-block;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 5px;
+    border: solid 1px grey;
+    background: rgb(153, 147, 147);
+    text-align: center;
+    padding: 2px 6px 6px 6px;
+    font-size: 12pt;
+    margin: 12px;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-box-shadow: 0px 6px 0px rgb(95, 87, 87);
+    -moz-box-shadow: 0px 6px 0px rgb(87, 77, 77);
+    text-transform: uppercase;
+    box-shadow: 0px 6px 0px rgb(85, 76, 76);
+    cursor: pointer;
+  
+   
+  }
+  
+  .btn:active {
+    -webkit-box-shadow: 0px 2px 0px rgb(85, 76, 76);
+    -moz-box-shadow: 0px 2px 0px rgb(85, 76, 76);
+    box-shadow: 0px 5px 0px rgb(85, 76, 76);
+    position: relative;
+    top: 4px;
+  }
+  
 .dropbtn {
   width: auto;
   color: #ecf0f1;

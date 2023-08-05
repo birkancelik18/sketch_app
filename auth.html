@@ -22,10 +22,18 @@
       <div class="column-left"></div>
 
       <div class="column-middle">
-        <div id="modal" class="modal">
+        <div id="modal" class="modal" style="  position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);">
           <div class="modal-content">
             <h3>Enter User Information</h3>
-            <input type="text" id="nameInput" placeholder="Enter your name" />
+            <input type="text" id="nameInput" placeholder="Enter your name" style="  background-color: #fcf7f7;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;"/>
             <div>
               <label>
                 <input
@@ -33,16 +41,19 @@
                   name="tool"
                   id="penInput"
                   value="pen"
-                  checked
+                 
+                  style="  
+                margin: 10px;"
                 />
                 Pen
               </label>
               <label>
-                <input type="radio" name="tool" id="mouseInput" value="mouse" />
+                <input type="radio" name="tool" id="mouseInput" value="mouse" style="  
+                margin: 10px;"/>
                 Mouse
               </label>
             </div>
-            <button id="submitBtn">Submit</button>
+            <button id="submitBtn" class="btn">Submit</button>
           </div>
         </div>
       </div>
