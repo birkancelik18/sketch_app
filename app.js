@@ -195,7 +195,7 @@ function getPointerHandler(evt) {
         stroke = [];
         xCords = [];
         yCords = [];
-
+        times = [];
     }
 
     // point = canvas.getPointer(); works with IE11, Chrome, but not Firefox
